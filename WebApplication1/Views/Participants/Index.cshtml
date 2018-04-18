@@ -1,0 +1,218 @@
+﻿@model IEnumerable<WebApplication1.Models.Participant>
+
+@{
+    ViewBag.Title = "Participants";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Request.Cookies["session"]["role"] == "Admin" || Request.Cookies["session"]["role"] == "Facilitator")
+{
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ENTRENA DB", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Participants", "Index", "Participants")</li>
+                    <li>@Html.ActionLink("Participation", "Index", "activities_participation")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li style="background-color:#800808">
+                        @if ((Request.Cookies["session"]["ses"] == "1") || Request.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Sign Out, " + Request.Cookies["session"]["user"], "Logout", "User")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Sign In", "Login", "User")
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table id="myTable" class="table">
+        <tr>
+            <th onclick="sortTable(0)">
+                Name
+            </th>
+            <th onclick="sortTable(1)">
+                Last Name
+            </th>
+            <th onclick="sortTable(2)">
+                Age
+            </th>
+            <th onclick="sortTable(3)">
+                Phone
+            </th>
+            <th onclick="sortTable(4)">
+                Email
+            </th>
+            <th onclick="sortTable(5)">
+                Registration Date
+            </th>
+            <th onclick="sortTable(6)">
+                Other Details
+            </th>
+            <th onclick="sortTable(7)">
+                Gender
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Participant_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Participant_Last_Name)
+                </td>
+                <td>
+                    @{
+                        var todaysDate = DateTime.Now;
+                        var itemDate = item.Participant_Date_Of_Birth ?? DateTime.MinValue;
+                        var dateDifference = DateTime.Now.Subtract(itemDate);
+                        var years = dateDifference.Days / 365;
+                        if (DateTime.Now.Year == years)
+                        {
+                            years = 0;
+                        }
+                    }
+                    @years
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Participant_Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Participant_Email)
+                </td>
+                <td>
+                    @{
+                        var dateRegistration = item.Participant_Registration_Date.Month + "/" + item.Participant_Registration_Date.Day + "/" + item.Participant_Registration_Date.Year;
+                    }
+                    @dateRegistration
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Participant_Details)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender.Gender_Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Participant_ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Participant_ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Participant_ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+else
+{
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ENTRENA DB", "Login", "User", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li style="background-color:#800808">
+                        @if ((Request.Cookies["session"]["ses"] == "1") || Request.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Sign Out, " + Request.Cookies["session"]["user"], "Logout", "User")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Sign In", "Login", "User")
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h3>You  are not allowed to see this information. Please <a href="/user/login">Sign In</a> to continue.</h3>
+    </div>
+}
+
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        function sortTable(n) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("myTable");
+            switching = true;
+            //Set the sorting direction to ascending:
+            dir = "asc";
+            /*Make a loop that will continue until
+            no switching has been done:*/
+            while (switching) {
+                //start by saying: no switching is done:
+                switching = false;
+                rows = table.getElementsByTagName("TR");
+                /*Loop through all table rows (except the
+                first, which contains table headers):*/
+                for (i = 1; i < (rows.length - 1); i++) {
+                    //start by saying there should be no switching:
+                    shouldSwitch = false;
+                    /*Get the two elements you want to compare,
+                    one from current row and one from the next:*/
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    /*check if the two rows should switch place,
+                    based on the direction, asc or desc:*/
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            //if so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            //if so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    /*If a switch has been marked, make the switch
+                    and mark that a switch has been done:*/
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    //Each time a switch is done, increase this count by 1:
+                    switchcount++;
+                } else {
+                    /*If no switching has been done AND the direction is "asc",
+                    set the direction to "desc" and run the while loop again.*/
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    </script>
+}

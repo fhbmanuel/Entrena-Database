@@ -1,0 +1,122 @@
+﻿@model WebApplication1.Models.Organization
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Request.Cookies["session"]["role"] == "Admin")
+{
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ENTRENA DB", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Participants", "Index", "Participants")</li>
+                    <li>@Html.ActionLink("Activities", "Index", "Activities")</li>
+                    <li>@Html.ActionLink("Participation", "Index", "activities_participation")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li style="background-color:#800808">
+                        @if ((Request.Cookies["session"]["ses"] == "1") || Request.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Sign Out, " + Request.Cookies["session"]["user"], "Logout", "User")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Sign In", "Login", "User")
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <h2>Create</h2>
+
+
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Organization</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Organization_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Organization_Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Organization_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Organization_Phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Organization_Phone, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Organization_Phone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Organization_Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Organization_Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Organization_Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Organization_Details, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Organization_Details, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Organization_Details, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" value="Back to List" class="btn btn-default" onclick="window.location='/Organizations/Index';" />
+                    <input type="submit" value="Create and Continue" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+}
+
+else
+{
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ENTRENA DB", "Login", "User", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li style="background-color:#800808">
+                        @Html.ActionLink("Sign In", "Login", "User")
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h3>You  are not allowed to see this information. Please <a href="/user/login">Sign In</a> to continue.</h3>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

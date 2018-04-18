@@ -1,0 +1,55 @@
+﻿@model WebApplication1.Models.User
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("ENTRENA DB", "Login", "User", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <fieldset>
+            <legend style="color:#428bca">Login</legend>
+            <div >
+                @Html.LabelFor(u => u.UserName)
+            </div>
+            <div >
+                @Html.TextBoxFor(u => u.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(u => u.UserName)
+            </div>
+            <div >
+                @Html.LabelFor(u => u.Password)
+            </div>
+            <div >
+                @Html.PasswordFor(u => u.Password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(u => u.Password)
+            </div>
+            <br />
+            <input type="submit" value="Log In" class="btn btn-default" />
+        </fieldset>
+    </div>
+    <br />
+    <b style="color:#d20707">@Html.ValidationSummary(true, "")</b>
+}
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    }
+

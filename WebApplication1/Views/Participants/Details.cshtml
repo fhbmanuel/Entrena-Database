@@ -1,0 +1,153 @@
+﻿@model WebApplication1.Models.Participant
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Request.Cookies["session"]["role"] == "Admin" || Request.Cookies["session"]["role"] == "Facilitator")
+{
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ENTRENA DB", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Participants", "Index", "Participants")</li>
+                    <li>@Html.ActionLink("Participation", "Index", "activities_participation")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li style="background-color:#800808">
+                        @if ((Request.Cookies["session"]["ses"] == "1") || Request.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Sign Out, " + Request.Cookies["session"]["user"], "Logout", "User")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Sign In", "Login", "User")
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <h2>Details</h2>
+
+    <div>
+        <h4>Participant</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Name
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Participant_Name)
+            </dd>
+
+            <dt>
+                Last Name
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Participant_Last_Name)
+            </dd>
+
+            <dt>
+                Age
+            </dt>
+
+            <dd>
+                @{
+                    var todaysDate = DateTime.Now;
+                    var itemDate = Model.Participant_Date_Of_Birth ?? DateTime.MinValue;
+                    var dateDifference = DateTime.Now.Subtract(itemDate);
+                    var years = dateDifference.Days / 365;
+                }
+                @years
+            </dd>
+
+            <dt>
+                Phone
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Participant_Phone)
+            </dd>
+
+            <dt>
+                Email
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Participant_Email)
+            </dd>
+
+            <dt>
+                Registration Date
+            </dt>
+
+            <dd>
+                @Model.Participant_Registration_Date.ToShortDateString()
+            </dd>
+
+            <dt>
+                Gender
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Gender.Gender_Name)
+            </dd>
+
+            <dt>
+                Other Details
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Participant_Details)
+            </dd>
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Participant_ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+
+else
+{
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ENTRENA DB", "Login", "User", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li style="background-color:#800808">
+                        @if ((Request.Cookies["session"]["ses"] == "1") || Request.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Sign Out, " + Request.Cookies["session"]["user"], "Logout", "User")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Sign In", "Login", "User")
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h3>You  are not allowed to see this information. Please <a href="/user/login">Sign In</a> to continue.</h3>
+    </div>
+}

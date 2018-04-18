@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+
+@if (Request.Cookies["session"]["ses"] == "1")
+{
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ENTRENA DB", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Participants", "Index", "Participants")</li>
+                    <li>@Html.ActionLink("Activities", "Index", "Activities")</li>
+                    <li>@Html.ActionLink("Participation", "Index", "activities_participation")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li style="background-color:#800808">
+                        @if ((Request.Cookies["session"]["ses"] == "1") || Request.IsAuthenticated)
+                        {
+                             @Html.ActionLink("Sign Out, " + Request.Cookies["session"]["user"], "Logout", "User")
+                        }
+                        else
+                        {
+                             @Html.ActionLink("Sign In", "Login", "User")
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+
+else
+{
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ENTRENA DB", "Login", "User", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li style="background-color:#800808">
+                        @Html.ActionLink("Sign In", "Login", "User")
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+
+<h2>@ViewBag.Title</h2>
+
+<address>
+    <a href="http://entrenadr.com/en/">Entrena, S.R.L. </a><br />
+    Phone: +1(809)567-8990 <br />
+    Main Contact: Diana Peña <br />
+    <strong>Email:</strong> <a href="mailto:dianapena@entrenadr.com">dianapena@entrenadr.com</a>
+</address>

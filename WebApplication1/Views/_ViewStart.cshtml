@@ -1,0 +1,10 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (!Request.Cookies.AllKeys.Contains("session"))
+{
+    Response.Cookies["session"]["ses"] = "0";
+    Response.Cookies["session"]["user"] = "";
+    Response.Cookies["session"]["role"] = "";
+}

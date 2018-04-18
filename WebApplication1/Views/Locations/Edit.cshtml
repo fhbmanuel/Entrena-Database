@@ -1,0 +1,172 @@
+﻿@using Jmelosegui.Mvc.GoogleMap
+@model WebApplication1.Models.Location
+
+<style>
+    #map {
+        height: 300px;
+        width: 100%;
+    }
+</style>
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Request.Cookies["session"]["role"] == "Admin")
+{
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ENTRENA DB", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Participants", "Index", "Participants")</li>
+                    <li>@Html.ActionLink("Activities", "Index", "Activities")</li>
+                    <li>@Html.ActionLink("Participation", "Index", "activities_participation")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li style="background-color:#800808">
+                        @if ((Request.Cookies["session"]["ses"] == "1") || Request.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Sign Out, " + Request.Cookies["session"]["user"], "Logout", "User")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Sign In", "Login", "User")
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <h2>Edit</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Location</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Location_ID)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProvinceID, "ProvinceID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.ProvinceID, new SelectList(Model.Provinces_Collection, "Province_ID", "Province_Name"), htmlAttributes: new { @class = "form-control", @id = "provinceDropDown" })
+                    @Html.ValidationMessageFor(model => model.ProvinceID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Location_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Location_Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Location_Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Latitude, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Latitude, new { htmlAttributes = new { @id = "latlongclicked", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Latitude, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Longitude, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Longitude, new { htmlAttributes = new { @id = "lotlongclicked", @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Longitude, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Location_Details, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Location_Details, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Location_Details, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+            <h4>Do you want to modify your location? (Drag with the mouse to move around) Click on a new one:</h4>
+        </div>
+    }
+
+    <div id="map"></div>
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+}
+
+else
+{
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ENTRENA DB", "Login", "User", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li style="background-color:#800808">
+                        @Html.ActionLink("Sign In", "Login", "User")
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h3>You  are not allowed to see this information. Please <a href="/user/login">Sign In</a> to continue.</h3>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        function initMap() {
+            var uluru = { lat: 18.470176, lng: -69.931465 };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 8,
+                center: uluru
+            });
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map
+            });
+            google.maps.event.addListener(map, 'click', function (event) {
+                document.getElementById('latlongclicked').value = event.latLng.lat()
+                document.getElementById('lotlongclicked').value = event.latLng.lng()
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', init_map);
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkiLZruvpImdrcCMc-UtAN46HxJKWu2y8&callback=initMap"
+            type="text/javascript"></script>
+    <script>
+        $(function () {
+            $("#provinceDropDown").chosen({
+                disable_search_treshold: 5
+            });
+        });
+    </script>
+}

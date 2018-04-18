@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@if (Request.Cookies["session"]["role"] == "Admin")
+{
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ENTRENA DB", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Participants", "Index", "Participants")</li>
+                    <li>@Html.ActionLink("Activities", "Index", "Activities")</li>
+                    <li>@Html.ActionLink("Participation", "Index", "activities_participation")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li style="background-color:#800808">
+                        @if ((Request.Cookies["session"]["ses"] == "1") || Request.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Sign Out, " + Request.Cookies["session"]["user"], "Logout", "User")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Sign In", "Login", "User")
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <fieldset>
+                <legend><a href="/participants/Index">Participants</a></legend>
+                <p>
+                    Here you can see all the participants, add more, delete some, or inquire about any details related to them.
+                </p>
+            </fieldset>
+        </div>
+
+        <div class="col-md-4">
+            <fieldset>
+                <legend>
+                    <a href="/activities/Index">Activities</a>
+                </legend>
+                <p>If you want to modify, add, or delete any activity, click the buttom.</p>
+            </fieldset>
+        </div>
+        <div class="col-md-4">
+            <fieldset>
+                <legend>
+                    <a href="/activities_participation/Index">Participation</a>
+                </legend>
+                <p>After you have registered all the participants of a given activity and the activity itself, link them together herer.</p>
+            </fieldset>
+        </div>
+    </div>
+
+    <div>
+        <fieldset>
+            <legend style="color:#428bca">Other Tables:</legend>
+
+            <ul>
+                <li>@Html.ActionLink("Facilitators", "Index", "Facilitators")</li>
+                <li>@Html.ActionLink("Organizations", "Index", "Organizations")</li>
+                <li>@Html.ActionLink("Partnership Types", "Index", "Partnership_Types")</li>
+                <li>@Html.ActionLink("Organizations Relationship", "Index", "Organizations_Relationship")</li>
+                <li>@Html.ActionLink("Projects", "Index", "Projects")</li>
+                <li>@Html.ActionLink("Testimonies", "Index", "Testimonies")</li>
+                <li>@Html.ActionLink("Products", "Index", "Products")</li>
+                <li>@Html.ActionLink("Sub-Products", "Index", "Sub_Products")</li>
+                <li>@Html.ActionLink("Countries", "Index", "Countries")</li>
+                <li>@Html.ActionLink("Provinces", "Index", "Provinces")</li>
+                <li>@Html.ActionLink("Locations", "Index", "Locations")</li>
+                <li>@Html.ActionLink("Beneficiary Types", "Index", "Beneficiary_Types")</li>
+                <li>@Html.ActionLink("Genders", "Index", "Genders")</li>
+            </ul>
+        </fieldset>
+    </div>
+}
+
+else if (Request.Cookies["session"]["role"] == "Facilitator")
+{ 
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ENTRENA DB", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Participants", "Index", "Participants")</li>
+                    <li>@Html.ActionLink("Participation", "Index", "activities_participation")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li style="background-color:#800808">
+                        @if ((Request.Cookies["session"]["ses"] == "1") || Request.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Sign Out, " + Request.Cookies["session"]["user"], "Logout", "User")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Sign In", "Login", "User")
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <fieldset>
+                <legend><a href="/participants/Index">Participants</a></legend>
+                <p>
+                    Here you can see all the participants, add more, delete some, or inquire about any details related to them.
+                </p>
+            </fieldset>
+        </div>
+        <div class="col-md-6">
+            <fieldset>
+                <legend>
+                    <a href="/activities_participation/Index">Participation</a>
+                </legend>
+                <p>After you have registered all the participants of a given activity and the activity itself, link them together herer.</p>
+            </fieldset>
+        </div>
+    </div>
+}
+
+else{
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ENTRENA DB", "Login", "User", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li style="background-color:#800808">
+                        @Html.ActionLink("Sign In", "Login", "User")
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h3>You  are not allowed to see this information. Please <a href="/user/login">Sign In</a> to continue.</h3>
+    </div>
+}

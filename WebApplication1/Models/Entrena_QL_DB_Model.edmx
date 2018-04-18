@@ -1,0 +1,1480 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Entrena_QL_DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Activities">
+          <Key>
+            <PropertyRef Name="Activity_ID" />
+          </Key>
+          <Property Name="Activity_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Activity_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SubProductID" Type="int" Nullable="false" />
+          <Property Name="Facilitator1" Type="int" Nullable="false" />
+          <Property Name="Facilitator2" Type="int" />
+          <Property Name="Facilitator3" Type="int" />
+          <Property Name="ImplementingPartnerID" Type="int" Nullable="false" />
+          <Property Name="LocationID" Type="int" Nullable="false" />
+          <Property Name="ProjectID" Type="int" />
+          <Property Name="BeneficiaryTypeID" Type="int" Nullable="false" />
+          <Property Name="Starting_Date" Type="date" Nullable="false" />
+          <Property Name="Ending_Date" Type="date" />
+          <Property Name="Activity_Details" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Activities_Participation">
+          <Key>
+            <PropertyRef Name="Activity_Participation_ID" />
+          </Key>
+          <Property Name="Activity_Participation_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActivityID" Type="int" Nullable="false" />
+          <Property Name="ParticipantID" Type="int" Nullable="false" />
+          <Property Name="Activity_Participation_Details" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Beneficiary_Types">
+          <Key>
+            <PropertyRef Name="Beneficiary_Type_ID" />
+          </Key>
+          <Property Name="Beneficiary_Type_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Beneficiary_Type_Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Beneficiary_Type_Details" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Country_ID" />
+          </Key>
+          <Property Name="Country_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Country_Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Country_Details" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Facilitators">
+          <Key>
+            <PropertyRef Name="Facilitator_ID" />
+          </Key>
+          <Property Name="Facilitator_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Facilitator_Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Facilitator_Last_Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Facilitator_Date_Of_Birth" Type="date" />
+          <Property Name="GenderID" Type="int" Nullable="false" />
+          <Property Name="Facilitator_Phone" Type="varchar" MaxLength="30" />
+          <Property Name="Facilitator_Email" Type="varchar" MaxLength="50" />
+          <Property Name="Facilitator_Registration_Date" Type="date" Nullable="false" />
+          <Property Name="Facilitator_Biodata" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Genders">
+          <Key>
+            <PropertyRef Name="Gender_ID" />
+          </Key>
+          <Property Name="Gender_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gender_Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Gender_Details" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="Location_ID" />
+          </Key>
+          <Property Name="Location_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProvinceID" Type="int" Nullable="false" />
+          <Property Name="Location_Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Latitude" Type="float" />
+          <Property Name="Longitude" Type="float" />
+          <Property Name="Location_Details" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Organizations">
+          <Key>
+            <PropertyRef Name="Organization_ID" />
+          </Key>
+          <Property Name="Organization_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Organization_Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Organization_Phone" Type="varchar" MaxLength="30" />
+          <Property Name="Organization_Email" Type="varchar" MaxLength="50" />
+          <Property Name="Organization_Details" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Organizations_Relationship">
+          <Key>
+            <PropertyRef Name="Organization_Relationship_ID" />
+          </Key>
+          <Property Name="Organization_Relationship_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrganizationID" Type="int" Nullable="false" />
+          <Property Name="PartnershipTypeID" Type="int" Nullable="false" />
+          <Property Name="Organization_Relationship_Details" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Participants">
+          <Key>
+            <PropertyRef Name="Participant_ID" />
+          </Key>
+          <Property Name="Participant_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Participant_Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Participant_Last_Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Participant_Date_Of_Birth" Type="date" />
+          <Property Name="GenderID" Type="int" Nullable="false" />
+          <Property Name="Participant_Phone" Type="varchar" MaxLength="30" />
+          <Property Name="Participant_Email" Type="varchar" MaxLength="50" />
+          <Property Name="Participant_Registration_Date" Type="date" Nullable="false" />
+          <Property Name="Participant_Details" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Partnership_Types">
+          <Key>
+            <PropertyRef Name="Partnership_Type_ID" />
+          </Key>
+          <Property Name="Partnership_Type_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Partnership_Type_Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Partnership_Type_Details" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Product_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Product_Details" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="Project_ID" />
+          </Key>
+          <Property Name="Project_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Project_Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ProjectDonor1" Type="int" Nullable="false" />
+          <Property Name="ProjectDonor2" Type="int" />
+          <Property Name="ProjectDonor3" Type="int" />
+          <Property Name="Project_Amount" Type="float" />
+          <Property Name="Project_Details" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Provinces">
+          <Key>
+            <PropertyRef Name="Province_ID" />
+          </Key>
+          <Property Name="Province_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Province_Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="CountryID" Type="int" Nullable="false" />
+          <Property Name="Province_Details" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Sub_Products">
+          <Key>
+            <PropertyRef Name="Sub_Product_ID" />
+          </Key>
+          <Property Name="Sub_Product_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Sub_Product_Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Sub_Product_Duration" Type="int" Nullable="false" />
+          <Property Name="Sub_Product_Details" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="System_Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RegDate" Type="datetime" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Testimonies">
+          <Key>
+            <PropertyRef Name="Testimony_ID" />
+          </Key>
+          <Property Name="Testimony_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActivityID" Type="int" Nullable="false" />
+          <Property Name="ParticipantID" Type="int" Nullable="false" />
+          <Property Name="Testimony_Details" Type="varchar" MaxLength="3000" />
+        </EntityType>
+        <Association Name="FK__Activitie__Activ__74794A92">
+          <End Role="Activities" Type="Self.Activities" Multiplicity="1" />
+          <End Role="Activities_Participation" Type="Self.Activities_Participation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activities">
+              <PropertyRef Name="Activity_ID" />
+            </Principal>
+            <Dependent Role="Activities_Participation">
+              <PropertyRef Name="ActivityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Activitie__Benef__719CDDE7">
+          <End Role="Beneficiary_Types" Type="Self.Beneficiary_Types" Multiplicity="1" />
+          <End Role="Activities" Type="Self.Activities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beneficiary_Types">
+              <PropertyRef Name="Beneficiary_Type_ID" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="BeneficiaryTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Activitie__Facil__6BE40491">
+          <End Role="Facilitators" Type="Self.Facilitators" Multiplicity="1" />
+          <End Role="Activities" Type="Self.Activities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facilitators">
+              <PropertyRef Name="Facilitator_ID" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="Facilitator1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Activitie__Facil__6CD828CA">
+          <End Role="Facilitators" Type="Self.Facilitators" Multiplicity="0..1" />
+          <End Role="Activities" Type="Self.Activities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facilitators">
+              <PropertyRef Name="Facilitator_ID" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="Facilitator2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Activitie__Facil__6DCC4D03">
+          <End Role="Facilitators" Type="Self.Facilitators" Multiplicity="0..1" />
+          <End Role="Activities" Type="Self.Activities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facilitators">
+              <PropertyRef Name="Facilitator_ID" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="Facilitator3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Activitie__Imple__6EC0713C">
+          <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+          <End Role="Activities" Type="Self.Activities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizations">
+              <PropertyRef Name="Organization_ID" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="ImplementingPartnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Activitie__Locat__6FB49575">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+          <End Role="Activities" Type="Self.Activities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="Location_ID" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Activitie__Parti__756D6ECB">
+          <End Role="Participants" Type="Self.Participants" Multiplicity="1" />
+          <End Role="Activities_Participation" Type="Self.Activities_Participation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participants">
+              <PropertyRef Name="Participant_ID" />
+            </Principal>
+            <Dependent Role="Activities_Participation">
+              <PropertyRef Name="ParticipantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Activitie__Proje__70A8B9AE">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="0..1" />
+          <End Role="Activities" Type="Self.Activities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Project_ID" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Activitie__SubPr__6AEFE058">
+          <End Role="Sub_Products" Type="Self.Sub_Products" Multiplicity="1" />
+          <End Role="Activities" Type="Self.Activities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Products">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="SubProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Facilitat__Gende__5AB9788F">
+          <End Role="Genders" Type="Self.Genders" Multiplicity="1" />
+          <End Role="Facilitators" Type="Self.Facilitators" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="Gender_ID" />
+            </Principal>
+            <Dependent Role="Facilitators">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6037: Foreign key constraint 'FK__Facilitat__Gende__5BAD9CC8' has been omitted from the storage model. Column 'GenderID' of table 'Entrena_QL_DatabaseModel.Store.Facilitators' is a foreign key participating in multiple relationships. A one-to-one Entity Model will not validate since data inconsistency is possible.
+        <Association Name="FK__Facilitat__Gende__5BAD9CC8">
+          <End Role="Genders" Type="Self.Genders" Multiplicity="1" />
+          <End Role="Facilitators" Type="Self.Facilitators" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="Gender_ID" />
+            </Principal>
+            <Dependent Role="Facilitators">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>-->
+        <Association Name="FK__Locations__Provi__40058253">
+          <End Role="Provinces" Type="Self.Provinces" Multiplicity="1" />
+          <End Role="Locations" Type="Self.Locations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provinces">
+              <PropertyRef Name="Province_ID" />
+            </Principal>
+            <Dependent Role="Locations">
+              <PropertyRef Name="ProvinceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Organizat__Organ__625A9A57">
+          <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+          <End Role="Organizations_Relationship" Type="Self.Organizations_Relationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizations">
+              <PropertyRef Name="Organization_ID" />
+            </Principal>
+            <Dependent Role="Organizations_Relationship">
+              <PropertyRef Name="OrganizationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Organizat__Partn__634EBE90">
+          <End Role="Partnership_Types" Type="Self.Partnership_Types" Multiplicity="1" />
+          <End Role="Organizations_Relationship" Type="Self.Organizations_Relationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partnership_Types">
+              <PropertyRef Name="Partnership_Type_ID" />
+            </Principal>
+            <Dependent Role="Organizations_Relationship">
+              <PropertyRef Name="PartnershipTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participa__Gende__55F4C372">
+          <End Role="Genders" Type="Self.Genders" Multiplicity="1" />
+          <End Role="Participants" Type="Self.Participants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="Gender_ID" />
+            </Principal>
+            <Dependent Role="Participants">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6037: Foreign key constraint 'FK__Participa__Gende__56E8E7AB' has been omitted from the storage model. Column 'GenderID' of table 'Entrena_QL_DatabaseModel.Store.Participants' is a foreign key participating in multiple relationships. A one-to-one Entity Model will not validate since data inconsistency is possible.
+        <Association Name="FK__Participa__Gende__56E8E7AB">
+          <End Role="Genders" Type="Self.Genders" Multiplicity="1" />
+          <End Role="Participants" Type="Self.Participants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="Gender_ID" />
+            </Principal>
+            <Dependent Role="Participants">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>-->
+        <Association Name="FK__Projects__Projec__662B2B3B">
+          <End Role="Organizations" Type="Self.Organizations" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizations">
+              <PropertyRef Name="Organization_ID" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="ProjectDonor1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Projects__Projec__671F4F74">
+          <End Role="Organizations" Type="Self.Organizations" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizations">
+              <PropertyRef Name="Organization_ID" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="ProjectDonor2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Projects__Projec__681373AD">
+          <End Role="Organizations" Type="Self.Organizations" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizations">
+              <PropertyRef Name="Organization_ID" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="ProjectDonor3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Provinces__Count__3D2915A8">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="Provinces" Type="Self.Provinces" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Country_ID" />
+            </Principal>
+            <Dependent Role="Provinces">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sub_Produ__Produ__46B27FE2">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Sub_Products" Type="Self.Sub_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Sub_Products">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6037: Foreign key constraint 'FK__Sub_Produ__Produ__7B264821' has been omitted from the storage model. Column 'ProductID' of table 'Entrena_QL_DatabaseModel.Store.Sub_Products' is a foreign key participating in multiple relationships. A one-to-one Entity Model will not validate since data inconsistency is possible.
+        <Association Name="FK__Sub_Produ__Produ__7B264821">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Sub_Products" Type="Self.Sub_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Sub_Products">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>-->
+        <Association Name="FK__Testimoni__Activ__7849DB76">
+          <End Role="Activities" Type="Self.Activities" Multiplicity="1" />
+          <End Role="Testimonies" Type="Self.Testimonies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activities">
+              <PropertyRef Name="Activity_ID" />
+            </Principal>
+            <Dependent Role="Testimonies">
+              <PropertyRef Name="ActivityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Testimoni__Parti__793DFFAF">
+          <End Role="Participants" Type="Self.Participants" Multiplicity="1" />
+          <End Role="Testimonies" Type="Self.Testimonies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participants">
+              <PropertyRef Name="Participant_ID" />
+            </Principal>
+            <Dependent Role="Testimonies">
+              <PropertyRef Name="ParticipantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entrena_QL_DatabaseModelStoreContainer">
+          <EntitySet Name="Activities" EntityType="Self.Activities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Activities_Participation" EntityType="Self.Activities_Participation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Beneficiary_Types" EntityType="Self.Beneficiary_Types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facilitators" EntityType="Self.Facilitators" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genders" EntityType="Self.Genders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Organizations" EntityType="Self.Organizations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Organizations_Relationship" EntityType="Self.Organizations_Relationship" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participants" EntityType="Self.Participants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partnership_Types" EntityType="Self.Partnership_Types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provinces" EntityType="Self.Provinces" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sub_Products" EntityType="Self.Sub_Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="System_Users" EntityType="Self.System_Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Testimonies" EntityType="Self.Testimonies" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Activitie__Activ__74794A92" Association="Self.FK__Activitie__Activ__74794A92">
+            <End Role="Activities" EntitySet="Activities" />
+            <End Role="Activities_Participation" EntitySet="Activities_Participation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Activitie__Benef__719CDDE7" Association="Self.FK__Activitie__Benef__719CDDE7">
+            <End Role="Beneficiary_Types" EntitySet="Beneficiary_Types" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Activitie__Facil__6BE40491" Association="Self.FK__Activitie__Facil__6BE40491">
+            <End Role="Facilitators" EntitySet="Facilitators" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Activitie__Facil__6CD828CA" Association="Self.FK__Activitie__Facil__6CD828CA">
+            <End Role="Facilitators" EntitySet="Facilitators" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Activitie__Facil__6DCC4D03" Association="Self.FK__Activitie__Facil__6DCC4D03">
+            <End Role="Facilitators" EntitySet="Facilitators" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Activitie__Imple__6EC0713C" Association="Self.FK__Activitie__Imple__6EC0713C">
+            <End Role="Organizations" EntitySet="Organizations" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Activitie__Locat__6FB49575" Association="Self.FK__Activitie__Locat__6FB49575">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Activitie__Parti__756D6ECB" Association="Self.FK__Activitie__Parti__756D6ECB">
+            <End Role="Participants" EntitySet="Participants" />
+            <End Role="Activities_Participation" EntitySet="Activities_Participation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Activitie__Proje__70A8B9AE" Association="Self.FK__Activitie__Proje__70A8B9AE">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Activitie__SubPr__6AEFE058" Association="Self.FK__Activitie__SubPr__6AEFE058">
+            <End Role="Sub_Products" EntitySet="Sub_Products" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Facilitat__Gende__5AB9788F" Association="Self.FK__Facilitat__Gende__5AB9788F">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Facilitators" EntitySet="Facilitators" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Locations__Provi__40058253" Association="Self.FK__Locations__Provi__40058253">
+            <End Role="Provinces" EntitySet="Provinces" />
+            <End Role="Locations" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Organizat__Organ__625A9A57" Association="Self.FK__Organizat__Organ__625A9A57">
+            <End Role="Organizations" EntitySet="Organizations" />
+            <End Role="Organizations_Relationship" EntitySet="Organizations_Relationship" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Organizat__Partn__634EBE90" Association="Self.FK__Organizat__Partn__634EBE90">
+            <End Role="Partnership_Types" EntitySet="Partnership_Types" />
+            <End Role="Organizations_Relationship" EntitySet="Organizations_Relationship" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participa__Gende__55F4C372" Association="Self.FK__Participa__Gende__55F4C372">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Participants" EntitySet="Participants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Projects__Projec__662B2B3B" Association="Self.FK__Projects__Projec__662B2B3B">
+            <End Role="Organizations" EntitySet="Organizations" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Projects__Projec__671F4F74" Association="Self.FK__Projects__Projec__671F4F74">
+            <End Role="Organizations" EntitySet="Organizations" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Projects__Projec__681373AD" Association="Self.FK__Projects__Projec__681373AD">
+            <End Role="Organizations" EntitySet="Organizations" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Provinces__Count__3D2915A8" Association="Self.FK__Provinces__Count__3D2915A8">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Provinces" EntitySet="Provinces" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sub_Produ__Produ__46B27FE2" Association="Self.FK__Sub_Produ__Produ__46B27FE2">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Sub_Products" EntitySet="Sub_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Testimoni__Activ__7849DB76" Association="Self.FK__Testimoni__Activ__7849DB76">
+            <End Role="Activities" EntitySet="Activities" />
+            <End Role="Testimonies" EntitySet="Testimonies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Testimoni__Parti__793DFFAF" Association="Self.FK__Testimoni__Parti__793DFFAF">
+            <End Role="Participants" EntitySet="Participants" />
+            <End Role="Testimonies" EntitySet="Testimonies" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Entrena_QL_DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="Activity_ID" />
+          </Key>
+          <Property Name="Activity_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Activity_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SubProductID" Type="Int32" Nullable="false" />
+          <Property Name="Facilitator1" Type="Int32" Nullable="false" />
+          <Property Name="Facilitator2" Type="Int32" />
+          <Property Name="Facilitator3" Type="Int32" />
+          <Property Name="ImplementingPartnerID" Type="Int32" Nullable="false" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="ProjectID" Type="Int32" />
+          <Property Name="BeneficiaryTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Starting_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Ending_Date" Type="DateTime" Precision="0" />
+          <Property Name="Activity_Details" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Activities_Participation" Relationship="Self.FK__Activitie__Activ__74794A92" FromRole="Activities" ToRole="Activities_Participation" />
+          <NavigationProperty Name="Beneficiary_Types" Relationship="Self.FK__Activitie__Benef__719CDDE7" FromRole="Activities" ToRole="Beneficiary_Types" />
+          <NavigationProperty Name="Facilitator" Relationship="Self.FK__Activitie__Facil__6BE40491" FromRole="Activities" ToRole="Facilitators" />
+          <NavigationProperty Name="Facilitator4" Relationship="Self.FK__Activitie__Facil__6CD828CA" FromRole="Activities" ToRole="Facilitators" />
+          <NavigationProperty Name="Facilitator5" Relationship="Self.FK__Activitie__Facil__6DCC4D03" FromRole="Activities" ToRole="Facilitators" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK__Activitie__Imple__6EC0713C" FromRole="Activities" ToRole="Organizations" />
+          <NavigationProperty Name="Location" Relationship="Self.FK__Activitie__Locat__6FB49575" FromRole="Activities" ToRole="Locations" />
+          <NavigationProperty Name="Project" Relationship="Self.FK__Activitie__Proje__70A8B9AE" FromRole="Activities" ToRole="Projects" />
+          <NavigationProperty Name="Sub_Products" Relationship="Self.FK__Activitie__SubPr__6AEFE058" FromRole="Activities" ToRole="Sub_Products" />
+          <NavigationProperty Name="Testimonies" Relationship="Self.FK__Testimoni__Activ__7849DB76" FromRole="Activities" ToRole="Testimonies" />
+        </EntityType>
+        <EntityType Name="Activities_Participation">
+          <Key>
+            <PropertyRef Name="Activity_Participation_ID" />
+          </Key>
+          <Property Name="Activity_Participation_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActivityID" Type="Int32" Nullable="false" />
+          <Property Name="ParticipantID" Type="Int32" Nullable="false" />
+          <Property Name="Activity_Participation_Details" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Activity" Relationship="Self.FK__Activitie__Activ__74794A92" FromRole="Activities_Participation" ToRole="Activities" />
+          <NavigationProperty Name="Participant" Relationship="Self.FK__Activitie__Parti__756D6ECB" FromRole="Activities_Participation" ToRole="Participants" />
+        </EntityType>
+        <EntityType Name="Beneficiary_Types">
+          <Key>
+            <PropertyRef Name="Beneficiary_Type_ID" />
+          </Key>
+          <Property Name="Beneficiary_Type_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Beneficiary_Type_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Beneficiary_Type_Details" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Activities" Relationship="Self.FK__Activitie__Benef__719CDDE7" FromRole="Beneficiary_Types" ToRole="Activities" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Country_ID" />
+          </Key>
+          <Property Name="Country_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Country_Details" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Provinces" Relationship="Self.FK__Provinces__Count__3D2915A8" FromRole="Countries" ToRole="Provinces" />
+        </EntityType>
+        <EntityType Name="Facilitator">
+          <Key>
+            <PropertyRef Name="Facilitator_ID" />
+          </Key>
+          <Property Name="Facilitator_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Facilitator_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Facilitator_Last_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Facilitator_Date_Of_Birth" Type="DateTime" Precision="0" />
+          <Property Name="GenderID" Type="Int32" Nullable="false" />
+          <Property Name="Facilitator_Phone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Facilitator_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Facilitator_Registration_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Facilitator_Biodata" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Activities" Relationship="Self.FK__Activitie__Facil__6BE40491" FromRole="Facilitators" ToRole="Activities" />
+          <NavigationProperty Name="Activities1" Relationship="Self.FK__Activitie__Facil__6CD828CA" FromRole="Facilitators" ToRole="Activities" />
+          <NavigationProperty Name="Activities2" Relationship="Self.FK__Activitie__Facil__6DCC4D03" FromRole="Facilitators" ToRole="Activities" />
+          <NavigationProperty Name="Gender" Relationship="Self.FK__Facilitat__Gende__5AB9788F" FromRole="Facilitators" ToRole="Genders" />
+          <NavigationProperty Name="Gender1" Relationship="Self.FK__Facilitat__Gende__5BAD9CC8" FromRole="Facilitators" ToRole="Genders" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Gender_ID" />
+          </Key>
+          <Property Name="Gender_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gender_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender_Details" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Facilitators" Relationship="Self.FK__Facilitat__Gende__5AB9788F" FromRole="Genders" ToRole="Facilitators" />
+          <NavigationProperty Name="Facilitators1" Relationship="Self.FK__Facilitat__Gende__5BAD9CC8" FromRole="Genders" ToRole="Facilitators" />
+          <NavigationProperty Name="Participants" Relationship="Self.FK__Participa__Gende__55F4C372" FromRole="Genders" ToRole="Participants" />
+          <NavigationProperty Name="Participants1" Relationship="Self.FK__Participa__Gende__56E8E7AB" FromRole="Genders" ToRole="Participants" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Location_ID" />
+          </Key>
+          <Property Name="Location_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProvinceID" Type="Int32" Nullable="false" />
+          <Property Name="Location_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Latitude" Type="Double" />
+          <Property Name="Longitude" Type="Double" />
+          <Property Name="Location_Details" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Activities" Relationship="Self.FK__Activitie__Locat__6FB49575" FromRole="Locations" ToRole="Activities" />
+          <NavigationProperty Name="Province" Relationship="Self.FK__Locations__Provi__40058253" FromRole="Locations" ToRole="Provinces" />
+        </EntityType>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="Organization_ID" />
+          </Key>
+          <Property Name="Organization_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Organization_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Organization_Phone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Organization_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Organization_Details" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Activities" Relationship="Self.FK__Activitie__Imple__6EC0713C" FromRole="Organizations" ToRole="Activities" />
+          <NavigationProperty Name="Organizations_Relationship" Relationship="Self.FK__Organizat__Organ__625A9A57" FromRole="Organizations" ToRole="Organizations_Relationship" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK__Projects__Projec__662B2B3B" FromRole="Organizations" ToRole="Projects" />
+          <NavigationProperty Name="Projects1" Relationship="Self.FK__Projects__Projec__671F4F74" FromRole="Organizations" ToRole="Projects" />
+          <NavigationProperty Name="Projects2" Relationship="Self.FK__Projects__Projec__681373AD" FromRole="Organizations" ToRole="Projects" />
+        </EntityType>
+        <EntityType Name="Organizations_Relationship">
+          <Key>
+            <PropertyRef Name="Organization_Relationship_ID" />
+          </Key>
+          <Property Name="Organization_Relationship_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrganizationID" Type="Int32" Nullable="false" />
+          <Property Name="PartnershipTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Organization_Relationship_Details" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK__Organizat__Organ__625A9A57" FromRole="Organizations_Relationship" ToRole="Organizations" />
+          <NavigationProperty Name="Partnership_Types" Relationship="Self.FK__Organizat__Partn__634EBE90" FromRole="Organizations_Relationship" ToRole="Partnership_Types" />
+        </EntityType>
+        <EntityType Name="Participant">
+          <Key>
+            <PropertyRef Name="Participant_ID" />
+          </Key>
+          <Property Name="Participant_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Participant_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Participant_Last_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Participant_Date_Of_Birth" Type="DateTime" Precision="0" />
+          <Property Name="GenderID" Type="Int32" Nullable="false" />
+          <Property Name="Participant_Phone" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Participant_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Participant_Registration_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Participant_Details" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Activities_Participation" Relationship="Self.FK__Activitie__Parti__756D6ECB" FromRole="Participants" ToRole="Activities_Participation" />
+          <NavigationProperty Name="Gender" Relationship="Self.FK__Participa__Gende__55F4C372" FromRole="Participants" ToRole="Genders" />
+          <NavigationProperty Name="Gender1" Relationship="Self.FK__Participa__Gende__56E8E7AB" FromRole="Participants" ToRole="Genders" />
+          <NavigationProperty Name="Testimonies" Relationship="Self.FK__Testimoni__Parti__793DFFAF" FromRole="Participants" ToRole="Testimonies" />
+        </EntityType>
+        <EntityType Name="Partnership_Types">
+          <Key>
+            <PropertyRef Name="Partnership_Type_ID" />
+          </Key>
+          <Property Name="Partnership_Type_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Partnership_Type_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Partnership_Type_Details" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Organizations_Relationship" Relationship="Self.FK__Organizat__Partn__634EBE90" FromRole="Partnership_Types" ToRole="Organizations_Relationship" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Product_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Product_Details" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Sub_Products" Relationship="Self.FK__Sub_Produ__Produ__46B27FE2" FromRole="Products" ToRole="Sub_Products" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Project_ID" />
+          </Key>
+          <Property Name="Project_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Project_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProjectDonor1" Type="Int32" Nullable="false" />
+          <Property Name="ProjectDonor2" Type="Int32" />
+          <Property Name="ProjectDonor3" Type="Int32" />
+          <Property Name="Project_Amount" Type="Double" />
+          <Property Name="Project_Details" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Activities" Relationship="Self.FK__Activitie__Proje__70A8B9AE" FromRole="Projects" ToRole="Activities" />
+          <NavigationProperty Name="Organization" Relationship="Self.FK__Projects__Projec__662B2B3B" FromRole="Projects" ToRole="Organizations" />
+          <NavigationProperty Name="Organization1" Relationship="Self.FK__Projects__Projec__671F4F74" FromRole="Projects" ToRole="Organizations" />
+          <NavigationProperty Name="Organization2" Relationship="Self.FK__Projects__Projec__681373AD" FromRole="Projects" ToRole="Organizations" />
+        </EntityType>
+        <EntityType Name="Province">
+          <Key>
+            <PropertyRef Name="Province_ID" />
+          </Key>
+          <Property Name="Province_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Province_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+          <Property Name="Province_Details" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Country" Relationship="Self.FK__Provinces__Count__3D2915A8" FromRole="Provinces" ToRole="Countries" />
+          <NavigationProperty Name="Locations" Relationship="Self.FK__Locations__Provi__40058253" FromRole="Provinces" ToRole="Locations" />
+        </EntityType>
+        <EntityType Name="Sub_Products">
+          <Key>
+            <PropertyRef Name="Sub_Product_ID" />
+          </Key>
+          <Property Name="Sub_Product_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Sub_Product_Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sub_Product_Duration" Type="Int32" Nullable="false" />
+          <Property Name="Sub_Product_Details" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Activities" Relationship="Self.FK__Activitie__SubPr__6AEFE058" FromRole="Sub_Products" ToRole="Activities" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Sub_Produ__Produ__46B27FE2" FromRole="Sub_Products" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Testimony">
+          <Key>
+            <PropertyRef Name="Testimony_ID" />
+          </Key>
+          <Property Name="Testimony_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActivityID" Type="Int32" Nullable="false" />
+          <Property Name="ParticipantID" Type="Int32" Nullable="false" />
+          <Property Name="Testimony_Details" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Activity" Relationship="Self.FK__Testimoni__Activ__7849DB76" FromRole="Testimonies" ToRole="Activities" />
+          <NavigationProperty Name="Participant" Relationship="Self.FK__Testimoni__Parti__793DFFAF" FromRole="Testimonies" ToRole="Participants" />
+        </EntityType>
+        <Association Name="FK__Activitie__Activ__74794A92">
+          <End Role="Activities" Type="Self.Activity" Multiplicity="1" />
+          <End Role="Activities_Participation" Type="Self.Activities_Participation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activities">
+              <PropertyRef Name="Activity_ID" />
+            </Principal>
+            <Dependent Role="Activities_Participation">
+              <PropertyRef Name="ActivityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Activitie__Benef__719CDDE7">
+          <End Role="Beneficiary_Types" Type="Self.Beneficiary_Types" Multiplicity="1" />
+          <End Role="Activities" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beneficiary_Types">
+              <PropertyRef Name="Beneficiary_Type_ID" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="BeneficiaryTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Activitie__Facil__6BE40491">
+          <End Role="Facilitators" Type="Self.Facilitator" Multiplicity="1" />
+          <End Role="Activities" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facilitators">
+              <PropertyRef Name="Facilitator_ID" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="Facilitator1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Activitie__Facil__6CD828CA">
+          <End Role="Facilitators" Type="Self.Facilitator" Multiplicity="0..1" />
+          <End Role="Activities" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facilitators">
+              <PropertyRef Name="Facilitator_ID" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="Facilitator2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Activitie__Facil__6DCC4D03">
+          <End Role="Facilitators" Type="Self.Facilitator" Multiplicity="0..1" />
+          <End Role="Activities" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facilitators">
+              <PropertyRef Name="Facilitator_ID" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="Facilitator3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Activitie__Imple__6EC0713C">
+          <End Role="Organizations" Type="Self.Organization" Multiplicity="1" />
+          <End Role="Activities" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizations">
+              <PropertyRef Name="Organization_ID" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="ImplementingPartnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Activitie__Locat__6FB49575">
+          <End Role="Locations" Type="Self.Location" Multiplicity="1" />
+          <End Role="Activities" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="Location_ID" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="LocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Activitie__Proje__70A8B9AE">
+          <End Role="Projects" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="Activities" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="Project_ID" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="ProjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Activitie__SubPr__6AEFE058">
+          <End Role="Sub_Products" Type="Self.Sub_Products" Multiplicity="1" />
+          <End Role="Activities" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sub_Products">
+              <PropertyRef Name="Sub_Product_ID" />
+            </Principal>
+            <Dependent Role="Activities">
+              <PropertyRef Name="SubProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Testimoni__Activ__7849DB76">
+          <End Role="Activities" Type="Self.Activity" Multiplicity="1" />
+          <End Role="Testimonies" Type="Self.Testimony" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Activities">
+              <PropertyRef Name="Activity_ID" />
+            </Principal>
+            <Dependent Role="Testimonies">
+              <PropertyRef Name="ActivityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Activitie__Parti__756D6ECB">
+          <End Role="Participants" Type="Self.Participant" Multiplicity="1" />
+          <End Role="Activities_Participation" Type="Self.Activities_Participation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participants">
+              <PropertyRef Name="Participant_ID" />
+            </Principal>
+            <Dependent Role="Activities_Participation">
+              <PropertyRef Name="ParticipantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Provinces__Count__3D2915A8">
+          <End Role="Countries" Type="Self.Country" Multiplicity="1" />
+          <End Role="Provinces" Type="Self.Province" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Country_ID" />
+            </Principal>
+            <Dependent Role="Provinces">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Facilitat__Gende__5AB9788F">
+          <End Role="Genders" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Facilitators" Type="Self.Facilitator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="Gender_ID" />
+            </Principal>
+            <Dependent Role="Facilitators">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Facilitat__Gende__5BAD9CC8">
+          <End Role="Genders" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Facilitators" Type="Self.Facilitator" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="Gender_ID" />
+            </Principal>
+            <Dependent Role="Facilitators">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participa__Gende__55F4C372">
+          <End Role="Genders" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Participants" Type="Self.Participant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="Gender_ID" />
+            </Principal>
+            <Dependent Role="Participants">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participa__Gende__56E8E7AB">
+          <End Role="Genders" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Participants" Type="Self.Participant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="Gender_ID" />
+            </Principal>
+            <Dependent Role="Participants">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Locations__Provi__40058253">
+          <End Role="Provinces" Type="Self.Province" Multiplicity="1" />
+          <End Role="Locations" Type="Self.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provinces">
+              <PropertyRef Name="Province_ID" />
+            </Principal>
+            <Dependent Role="Locations">
+              <PropertyRef Name="ProvinceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Organizat__Organ__625A9A57">
+          <End Role="Organizations" Type="Self.Organization" Multiplicity="1" />
+          <End Role="Organizations_Relationship" Type="Self.Organizations_Relationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizations">
+              <PropertyRef Name="Organization_ID" />
+            </Principal>
+            <Dependent Role="Organizations_Relationship">
+              <PropertyRef Name="OrganizationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Projects__Projec__662B2B3B">
+          <End Role="Organizations" Type="Self.Organization" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizations">
+              <PropertyRef Name="Organization_ID" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="ProjectDonor1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Projects__Projec__671F4F74">
+          <End Role="Organizations" Type="Self.Organization" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizations">
+              <PropertyRef Name="Organization_ID" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="ProjectDonor2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Projects__Projec__681373AD">
+          <End Role="Organizations" Type="Self.Organization" Multiplicity="0..1" />
+          <End Role="Projects" Type="Self.Project" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizations">
+              <PropertyRef Name="Organization_ID" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="ProjectDonor3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Organizat__Partn__634EBE90">
+          <End Role="Partnership_Types" Type="Self.Partnership_Types" Multiplicity="1" />
+          <End Role="Organizations_Relationship" Type="Self.Organizations_Relationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partnership_Types">
+              <PropertyRef Name="Partnership_Type_ID" />
+            </Principal>
+            <Dependent Role="Organizations_Relationship">
+              <PropertyRef Name="PartnershipTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Testimoni__Parti__793DFFAF">
+          <End Role="Participants" Type="Self.Participant" Multiplicity="1" />
+          <End Role="Testimonies" Type="Self.Testimony" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participants">
+              <PropertyRef Name="Participant_ID" />
+            </Principal>
+            <Dependent Role="Testimonies">
+              <PropertyRef Name="ParticipantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sub_Produ__Produ__46B27FE2">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="Sub_Products" Type="Self.Sub_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Sub_Products">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entrena_QL_Database_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Activities" EntityType="Self.Activity" />
+          <EntitySet Name="Activities_Participation" EntityType="Self.Activities_Participation" />
+          <EntitySet Name="Beneficiary_Types" EntityType="Self.Beneficiary_Types" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
+          <EntitySet Name="Facilitators" EntityType="Self.Facilitator" />
+          <EntitySet Name="Genders" EntityType="Self.Gender" />
+          <EntitySet Name="Locations" EntityType="Self.Location" />
+          <EntitySet Name="Organizations" EntityType="Self.Organization" />
+          <EntitySet Name="Organizations_Relationship" EntityType="Self.Organizations_Relationship" />
+          <EntitySet Name="Participants" EntityType="Self.Participant" />
+          <EntitySet Name="Partnership_Types" EntityType="Self.Partnership_Types" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="Provinces" EntityType="Self.Province" />
+          <EntitySet Name="Sub_Products" EntityType="Self.Sub_Products" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Testimonies" EntityType="Self.Testimony" />
+          <AssociationSet Name="FK__Activitie__Activ__74794A92" Association="Self.FK__Activitie__Activ__74794A92">
+            <End Role="Activities" EntitySet="Activities" />
+            <End Role="Activities_Participation" EntitySet="Activities_Participation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Activitie__Benef__719CDDE7" Association="Self.FK__Activitie__Benef__719CDDE7">
+            <End Role="Beneficiary_Types" EntitySet="Beneficiary_Types" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Activitie__Facil__6BE40491" Association="Self.FK__Activitie__Facil__6BE40491">
+            <End Role="Facilitators" EntitySet="Facilitators" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Activitie__Facil__6CD828CA" Association="Self.FK__Activitie__Facil__6CD828CA">
+            <End Role="Facilitators" EntitySet="Facilitators" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Activitie__Facil__6DCC4D03" Association="Self.FK__Activitie__Facil__6DCC4D03">
+            <End Role="Facilitators" EntitySet="Facilitators" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Activitie__Imple__6EC0713C" Association="Self.FK__Activitie__Imple__6EC0713C">
+            <End Role="Organizations" EntitySet="Organizations" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Activitie__Locat__6FB49575" Association="Self.FK__Activitie__Locat__6FB49575">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Activitie__Proje__70A8B9AE" Association="Self.FK__Activitie__Proje__70A8B9AE">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Activitie__SubPr__6AEFE058" Association="Self.FK__Activitie__SubPr__6AEFE058">
+            <End Role="Sub_Products" EntitySet="Sub_Products" />
+            <End Role="Activities" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Testimoni__Activ__7849DB76" Association="Self.FK__Testimoni__Activ__7849DB76">
+            <End Role="Activities" EntitySet="Activities" />
+            <End Role="Testimonies" EntitySet="Testimonies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Activitie__Parti__756D6ECB" Association="Self.FK__Activitie__Parti__756D6ECB">
+            <End Role="Participants" EntitySet="Participants" />
+            <End Role="Activities_Participation" EntitySet="Activities_Participation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Provinces__Count__3D2915A8" Association="Self.FK__Provinces__Count__3D2915A8">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Provinces" EntitySet="Provinces" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Facilitat__Gende__5AB9788F" Association="Self.FK__Facilitat__Gende__5AB9788F">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Facilitators" EntitySet="Facilitators" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Facilitat__Gende__5BAD9CC8" Association="Self.FK__Facilitat__Gende__5BAD9CC8">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Facilitators" EntitySet="Facilitators" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participa__Gende__55F4C372" Association="Self.FK__Participa__Gende__55F4C372">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Participants" EntitySet="Participants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participa__Gende__56E8E7AB" Association="Self.FK__Participa__Gende__56E8E7AB">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Participants" EntitySet="Participants" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Locations__Provi__40058253" Association="Self.FK__Locations__Provi__40058253">
+            <End Role="Provinces" EntitySet="Provinces" />
+            <End Role="Locations" EntitySet="Locations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Organizat__Organ__625A9A57" Association="Self.FK__Organizat__Organ__625A9A57">
+            <End Role="Organizations" EntitySet="Organizations" />
+            <End Role="Organizations_Relationship" EntitySet="Organizations_Relationship" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Projects__Projec__662B2B3B" Association="Self.FK__Projects__Projec__662B2B3B">
+            <End Role="Organizations" EntitySet="Organizations" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Projects__Projec__671F4F74" Association="Self.FK__Projects__Projec__671F4F74">
+            <End Role="Organizations" EntitySet="Organizations" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Projects__Projec__681373AD" Association="Self.FK__Projects__Projec__681373AD">
+            <End Role="Organizations" EntitySet="Organizations" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Organizat__Partn__634EBE90" Association="Self.FK__Organizat__Partn__634EBE90">
+            <End Role="Partnership_Types" EntitySet="Partnership_Types" />
+            <End Role="Organizations_Relationship" EntitySet="Organizations_Relationship" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Testimoni__Parti__793DFFAF" Association="Self.FK__Testimoni__Parti__793DFFAF">
+            <End Role="Participants" EntitySet="Participants" />
+            <End Role="Testimonies" EntitySet="Testimonies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sub_Produ__Produ__46B27FE2" Association="Self.FK__Sub_Produ__Produ__46B27FE2">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Sub_Products" EntitySet="Sub_Products" />
+          </AssociationSet>
+          <EntitySet Name="System_Users" EntityType="Entrena_QL_DatabaseModel.System_Users" />
+        </EntityContainer>
+        <EntityType Name="System_Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RegDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Entrena_QL_DatabaseModelStoreContainer" CdmEntityContainer="Entrena_QL_Database_Entities">
+          <EntitySetMapping Name="Activities">
+            <EntityTypeMapping TypeName="Entrena_QL_DatabaseModel.Activity">
+              <MappingFragment StoreEntitySet="Activities">
+                <ScalarProperty Name="Activity_ID" ColumnName="Activity_ID" />
+                <ScalarProperty Name="Activity_Name" ColumnName="Activity_Name" />
+                <ScalarProperty Name="SubProductID" ColumnName="SubProductID" />
+                <ScalarProperty Name="Facilitator1" ColumnName="Facilitator1" />
+                <ScalarProperty Name="Facilitator2" ColumnName="Facilitator2" />
+                <ScalarProperty Name="Facilitator3" ColumnName="Facilitator3" />
+                <ScalarProperty Name="ImplementingPartnerID" ColumnName="ImplementingPartnerID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="BeneficiaryTypeID" ColumnName="BeneficiaryTypeID" />
+                <ScalarProperty Name="Starting_Date" ColumnName="Starting_Date" />
+                <ScalarProperty Name="Ending_Date" ColumnName="Ending_Date" />
+                <ScalarProperty Name="Activity_Details" ColumnName="Activity_Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Activities_Participation">
+            <EntityTypeMapping TypeName="Entrena_QL_DatabaseModel.Activities_Participation">
+              <MappingFragment StoreEntitySet="Activities_Participation">
+                <ScalarProperty Name="Activity_Participation_ID" ColumnName="Activity_Participation_ID" />
+                <ScalarProperty Name="ActivityID" ColumnName="ActivityID" />
+                <ScalarProperty Name="ParticipantID" ColumnName="ParticipantID" />
+                <ScalarProperty Name="Activity_Participation_Details" ColumnName="Activity_Participation_Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Beneficiary_Types">
+            <EntityTypeMapping TypeName="Entrena_QL_DatabaseModel.Beneficiary_Types">
+              <MappingFragment StoreEntitySet="Beneficiary_Types">
+                <ScalarProperty Name="Beneficiary_Type_ID" ColumnName="Beneficiary_Type_ID" />
+                <ScalarProperty Name="Beneficiary_Type_Name" ColumnName="Beneficiary_Type_Name" />
+                <ScalarProperty Name="Beneficiary_Type_Details" ColumnName="Beneficiary_Type_Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="Entrena_QL_DatabaseModel.Country">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="Country_ID" ColumnName="Country_ID" />
+                <ScalarProperty Name="Country_Name" ColumnName="Country_Name" />
+                <ScalarProperty Name="Country_Details" ColumnName="Country_Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facilitators">
+            <EntityTypeMapping TypeName="Entrena_QL_DatabaseModel.Facilitator">
+              <MappingFragment StoreEntitySet="Facilitators">
+                <ScalarProperty Name="Facilitator_ID" ColumnName="Facilitator_ID" />
+                <ScalarProperty Name="Facilitator_Name" ColumnName="Facilitator_Name" />
+                <ScalarProperty Name="Facilitator_Last_Name" ColumnName="Facilitator_Last_Name" />
+                <ScalarProperty Name="Facilitator_Date_Of_Birth" ColumnName="Facilitator_Date_Of_Birth" />
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+                <ScalarProperty Name="Facilitator_Phone" ColumnName="Facilitator_Phone" />
+                <ScalarProperty Name="Facilitator_Email" ColumnName="Facilitator_Email" />
+                <ScalarProperty Name="Facilitator_Registration_Date" ColumnName="Facilitator_Registration_Date" />
+                <ScalarProperty Name="Facilitator_Biodata" ColumnName="Facilitator_Biodata" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="Entrena_QL_DatabaseModel.Gender">
+              <MappingFragment StoreEntitySet="Genders">
+                <ScalarProperty Name="Gender_ID" ColumnName="Gender_ID" />
+                <ScalarProperty Name="Gender_Name" ColumnName="Gender_Name" />
+                <ScalarProperty Name="Gender_Details" ColumnName="Gender_Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="Entrena_QL_DatabaseModel.Location">
+              <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="Location_ID" ColumnName="Location_ID" />
+                <ScalarProperty Name="ProvinceID" ColumnName="ProvinceID" />
+                <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Location_Details" ColumnName="Location_Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organizations">
+            <EntityTypeMapping TypeName="Entrena_QL_DatabaseModel.Organization">
+              <MappingFragment StoreEntitySet="Organizations">
+                <ScalarProperty Name="Organization_ID" ColumnName="Organization_ID" />
+                <ScalarProperty Name="Organization_Name" ColumnName="Organization_Name" />
+                <ScalarProperty Name="Organization_Phone" ColumnName="Organization_Phone" />
+                <ScalarProperty Name="Organization_Email" ColumnName="Organization_Email" />
+                <ScalarProperty Name="Organization_Details" ColumnName="Organization_Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organizations_Relationship">
+            <EntityTypeMapping TypeName="Entrena_QL_DatabaseModel.Organizations_Relationship">
+              <MappingFragment StoreEntitySet="Organizations_Relationship">
+                <ScalarProperty Name="Organization_Relationship_ID" ColumnName="Organization_Relationship_ID" />
+                <ScalarProperty Name="OrganizationID" ColumnName="OrganizationID" />
+                <ScalarProperty Name="PartnershipTypeID" ColumnName="PartnershipTypeID" />
+                <ScalarProperty Name="Organization_Relationship_Details" ColumnName="Organization_Relationship_Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participants">
+            <EntityTypeMapping TypeName="Entrena_QL_DatabaseModel.Participant">
+              <MappingFragment StoreEntitySet="Participants">
+                <ScalarProperty Name="Participant_ID" ColumnName="Participant_ID" />
+                <ScalarProperty Name="Participant_Name" ColumnName="Participant_Name" />
+                <ScalarProperty Name="Participant_Last_Name" ColumnName="Participant_Last_Name" />
+                <ScalarProperty Name="Participant_Date_Of_Birth" ColumnName="Participant_Date_Of_Birth" />
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+                <ScalarProperty Name="Participant_Phone" ColumnName="Participant_Phone" />
+                <ScalarProperty Name="Participant_Email" ColumnName="Participant_Email" />
+                <ScalarProperty Name="Participant_Registration_Date" ColumnName="Participant_Registration_Date" />
+                <ScalarProperty Name="Participant_Details" ColumnName="Participant_Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Partnership_Types">
+            <EntityTypeMapping TypeName="Entrena_QL_DatabaseModel.Partnership_Types">
+              <MappingFragment StoreEntitySet="Partnership_Types">
+                <ScalarProperty Name="Partnership_Type_ID" ColumnName="Partnership_Type_ID" />
+                <ScalarProperty Name="Partnership_Type_Name" ColumnName="Partnership_Type_Name" />
+                <ScalarProperty Name="Partnership_Type_Details" ColumnName="Partnership_Type_Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="Entrena_QL_DatabaseModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="Product_Details" ColumnName="Product_Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="Entrena_QL_DatabaseModel.Project">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="Project_ID" ColumnName="Project_ID" />
+                <ScalarProperty Name="Project_Name" ColumnName="Project_Name" />
+                <ScalarProperty Name="ProjectDonor1" ColumnName="ProjectDonor1" />
+                <ScalarProperty Name="ProjectDonor2" ColumnName="ProjectDonor2" />
+                <ScalarProperty Name="ProjectDonor3" ColumnName="ProjectDonor3" />
+                <ScalarProperty Name="Project_Amount" ColumnName="Project_Amount" />
+                <ScalarProperty Name="Project_Details" ColumnName="Project_Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provinces">
+            <EntityTypeMapping TypeName="Entrena_QL_DatabaseModel.Province">
+              <MappingFragment StoreEntitySet="Provinces">
+                <ScalarProperty Name="Province_ID" ColumnName="Province_ID" />
+                <ScalarProperty Name="Province_Name" ColumnName="Province_Name" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="Province_Details" ColumnName="Province_Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sub_Products">
+            <EntityTypeMapping TypeName="Entrena_QL_DatabaseModel.Sub_Products">
+              <MappingFragment StoreEntitySet="Sub_Products">
+                <ScalarProperty Name="Sub_Product_ID" ColumnName="Sub_Product_ID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Sub_Product_Name" ColumnName="Sub_Product_Name" />
+                <ScalarProperty Name="Sub_Product_Duration" ColumnName="Sub_Product_Duration" />
+                <ScalarProperty Name="Sub_Product_Details" ColumnName="Sub_Product_Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Entrena_QL_DatabaseModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Testimonies">
+            <EntityTypeMapping TypeName="Entrena_QL_DatabaseModel.Testimony">
+              <MappingFragment StoreEntitySet="Testimonies">
+                <ScalarProperty Name="Testimony_ID" ColumnName="Testimony_ID" />
+                <ScalarProperty Name="ActivityID" ColumnName="ActivityID" />
+                <ScalarProperty Name="ParticipantID" ColumnName="ParticipantID" />
+                <ScalarProperty Name="Testimony_Details" ColumnName="Testimony_Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="System_Users">
+            <EntityTypeMapping TypeName="Entrena_QL_DatabaseModel.System_Users">
+              <MappingFragment StoreEntitySet="System_Users">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

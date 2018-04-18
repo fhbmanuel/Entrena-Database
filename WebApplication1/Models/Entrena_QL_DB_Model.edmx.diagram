@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9027c399eb854bb5baf1601d5fd27e35" Name="Diagram1">
+        <EntityTypeShape EntityType="Entrena_QL_DatabaseModel.Activity" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entrena_QL_DatabaseModel.Activities_Participation" Width="1.5" PointX="7.5" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entrena_QL_DatabaseModel.Beneficiary_Types" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entrena_QL_DatabaseModel.Country" Width="1.5" PointX="1.5" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entrena_QL_DatabaseModel.Facilitator" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entrena_QL_DatabaseModel.Gender" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entrena_QL_DatabaseModel.Location" Width="1.5" PointX="3" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entrena_QL_DatabaseModel.Organization" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entrena_QL_DatabaseModel.Organizations_Relationship" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entrena_QL_DatabaseModel.Participant" Width="1.5" PointX="5.125" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entrena_QL_DatabaseModel.Partnership_Types" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entrena_QL_DatabaseModel.Product" Width="1.5" PointX="0.75" PointY="26.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entrena_QL_DatabaseModel.Project" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entrena_QL_DatabaseModel.Province" Width="1.5" PointX="0.75" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entrena_QL_DatabaseModel.Sub_Products" Width="1.5" PointX="3" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entrena_QL_DatabaseModel.sysdiagram" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Entrena_QL_DatabaseModel.Testimony" Width="1.5" PointX="7.5" PointY="8.125" IsExpanded="true" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Activitie__Activ__74794A92" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Activitie__Benef__719CDDE7" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Activitie__Facil__6BE40491" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Activitie__Facil__6CD828CA" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Activitie__Facil__6DCC4D03" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Activitie__Imple__6EC0713C" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Activitie__Locat__6FB49575" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Activitie__Proje__70A8B9AE" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Activitie__SubPr__6AEFE058" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Testimoni__Activ__7849DB76" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Activitie__Parti__756D6ECB" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Provinces__Count__3D2915A8" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Facilitat__Gende__5AB9788F" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Facilitat__Gende__5BAD9CC8" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Participa__Gende__55F4C372" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Participa__Gende__56E8E7AB" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Locations__Provi__40058253" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Organizat__Organ__625A9A57" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Projects__Projec__662B2B3B" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Projects__Projec__671F4F74" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Projects__Projec__681373AD" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Organizat__Partn__634EBE90" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Testimoni__Parti__793DFFAF" ManuallyRouted="false" />
+        <AssociationConnector Association="Entrena_QL_DatabaseModel.FK__Sub_Produ__Produ__46B27FE2" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Entrena_QL_DatabaseModel.System_Users" Width="1.5" PointX="5.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
