@@ -39,7 +39,7 @@
 
     <h2>Summary</h2>
 
-    <table id="myTable" class="table">
+    <table id="demo-tot" class="table">
         <tr>
             <th>
                 Activity
@@ -116,5 +116,10 @@ else
     <div class="container">
         <h3>You  are not allowed to see this information. Please <a href="/user/login">Sign In</a> to continue.</h3>
     </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="/tablefilter/dist/tablefilter/tablefilter.js"></script>
 }
 
