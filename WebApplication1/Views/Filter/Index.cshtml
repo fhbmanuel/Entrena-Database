@@ -5,15 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style>
-    .coolContainer h4:first-of-type {
-        float: left;
-    }
-
-    .coolContainer h4:last-of-type {
-        float: right;
-    }
-</style>
 
 @if (Request.Cookies["session"]["role"] == "Admin")
 {
@@ -48,11 +39,8 @@
     </div>
 
     <h2 align="center" style="color:#428bca">Summary</h2>
-    <div class="coolContainer">
-        <h4 style="color:#428bca">Total Participants: </h4>
-        <h4 style="color:#428bca">Total Activities: </h4>
-    </div>
-    <br>
+
+    <code>Total Participants: </code> <span id="flt-sum" class="badge"></span>
 
     <table id="my-table" class="table">
         <tr>
@@ -117,8 +105,6 @@
     <input type="button" class="btn btn-default" onclick="tableToExcel('my-table', 'name', 'myfile.xls')" value="Export to Excel">
     <br><br>
 }
-
-<!--What happens when you are not an Admin.-->
 
 else
 {
@@ -186,18 +172,41 @@ else
             paging: {
                 results_per_page: ['Records: ', [10, 25, 50, 100]]
             },
-            extensions: [{
-                name: 'sort'
-            }, {
-                name: 'filtersVisibility',
-                target_id: 'fltsBtn'
-            }]
+            col_types: [
+                'string', 'string', 'string',
+                'string', 'string', 'string',
+                'string', 'string', 'string',
+                'string', 'string', 'number',
+                'number'
+            ],
+            extensions: [
+                {
+                    name: 'sort'
+                },
+                {
+                    // minimal configuration for column operation extension
+                    name: 'colOps',
+                    col: [12]
+                }
+            ]
         }
-        var tf = new TableFilter('my-table', filtersConfig)
+        var tf = new TableFilter('my-table', filtersConfig);
+        tf.emitter.on(['column-calc'], calcAll);
         tf.init();
+
+        function calcAll(tf, colOps, colIndex) {
+            calc(tf, colOps, colIndex, 'sum', false, 'flt-sum');
+        }
+        function calc(tf, colOps, colIndex, operation, onlyVisible, labelId) {
+            var colValues = tf.getFilteredDataCol(colIndex, false, true, [], onlyVisible);
+            var result = 0;
+            if (operation == 'sum') {
+                result = colOps.calcSum(colValues);
+            }
+            document.getElementById(labelId).innerHTML = result.toFixed(0);
+        }
     </script>
 
-    @* Export to Excel *@
     <script>
         var tableToExcel = (function () {
             var uri = 'data:application/vnd.ms-excel;base64,'
@@ -216,12 +225,6 @@ else
         })()
     </script>
 
-    @* Count cells in table *@
-    <script>
-        function myFunction() {
-            var x = document.getElementById("myTable").rows[0].cells.length;
-            document.getElementById("demo").innerHTML = "Found " + x + " cells in the first tr element.";
-        }
-    </script>
+
 }
 

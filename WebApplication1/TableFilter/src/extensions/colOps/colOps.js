@@ -33,93 +33,26 @@ export default class ColOps extends Feature {
      */
     constructor(tf, opts) {
         super(tf, opts.name);
-
-        /**
-         * Callback fired before columns operations start
-         * @type {Function}
-         */
         this.onBeforeOperation = defaultsFn(opts.on_before_operation, EMPTY_FN);
-
-        /**
-         * Callback fired after columns operations are completed
-         * @type {Function}
-         */
         this.onAfterOperation = defaultsFn(opts.on_after_operation, EMPTY_FN);
-
-        /**
-         * Configuration options
-         * @type {Object}
-         */
         this.opts = opts;
-
-        /**
-         * List of DOM element IDs containing column's calculation result
-         * @type {Array}
-         */
         this.labelIds = defaultsArr(opts.id, []);
-
-        /**
-         * List of columns' indexes for calculations
-         * @type {Array}
-         */
         this.colIndexes = defaultsArr(opts.col, []);
-
-        /**
-         * List of operations - possible values: 'sum', 'mean', 'min', 'max',
-         * 'median', 'q1', 'q3'
-         * @type {Array}
-         */
         this.operations = defaultsArr(opts.operation, []);
-
-        /**
-         * List of write methods used to write the result - possible values:
-         * 'innerHTML', 'setValue', 'createTextNode'
-         * @type {Array}
-         */
         this.outputTypes = defaultsArr(opts.write_method, []);
-
-        /**
-         * List of format objects used for formatting the result -
-         * refer to https://github.com/componitable/format-number to check
-         * configuration options
-         * @type {Array}
-         */
         this.formatResults = defaultsArr(opts.format_result, []);
-
-        /**
-         * List of row indexes displaying the results
-         * @type {Array}
-         */
         this.totRowIndexes = defaultsArr(opts.tot_row_index, []);
-
-        /**
-         * List of row indexes excluded from calculations
-         * @type {Array}
-         */
         this.excludeRows = defaultsArr(opts.exclude_row, []);
-
-        /**
-         * List of decimal precision for calculation results
-         * @type {Array}
-         */
         this.decimalPrecisions = defaultsArr(opts.decimal_precision, 2);
-
         this.enable();
     }
-
-    /**
-     * Initializes ColOps instance
-     */
+    
     init() {
         if (this.initialized) {
             return;
         }
-        // subscribe to events
         this.emitter.on(EVENTS, () => this.calcAll());
-
         this.calcAll();
-
-        /** @inherited */
         this.initialized = true;
     }
 
