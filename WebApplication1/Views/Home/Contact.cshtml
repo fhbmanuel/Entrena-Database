@@ -2,7 +2,7 @@
     ViewBag.Title = "Contact";
 }
 
-@if (Request.Cookies["session"]["ses"] == "1")
+@if (Request.Cookies["session"]["role"] == "Admin")
 {
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -22,11 +22,43 @@
                     <li style="background-color:#800808">
                         @if ((Request.Cookies["session"]["ses"] == "1") || Request.IsAuthenticated)
                         {
-                             @Html.ActionLink("Sign Out, " + Request.Cookies["session"]["user"], "Logout", "User")
+                            @Html.ActionLink("Sign Out, " + Request.Cookies["session"]["user"], "Logout", "User")
                         }
                         else
                         {
-                             @Html.ActionLink("Sign In", "Login", "User")
+                            @Html.ActionLink("Sign In", "Login", "User")
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+
+else if (Request.Cookies["session"]["role"] == "Facilitator")
+{
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ENTRENA DB", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Participants", "Index", "Participants")</li>
+                    <li>@Html.ActionLink("Participation", "Index", "activities_participation")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li style="background-color:#800808">
+                        @if ((Request.Cookies["session"]["ses"] == "1") || Request.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Sign Out, " + Request.Cookies["session"]["user"], "Logout", "User")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Sign In", "Login", "User")
                         }
                     </li>
                 </ul>

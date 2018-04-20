@@ -343,11 +343,13 @@
       <DependentUpon>Entrena_QL_DB_Model.edmx</DependentUpon>
     </Content>
     <Content Include="Scripts\chosen.jquery.min.js" />
+    <Content Include="Scripts\dataTables.buttons.min.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jmelosegui.googlemap.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
@@ -359,6 +361,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\vfs_fonts.js" />
     <Content Include="TableFilter\.gitignore" />
     <Content Include="TableFilter\dist\starter.html" />
     <Content Include="TableFilter\dist\tablefilter\style\colsVisibility.css" />
@@ -835,6 +838,7 @@
     <Content Include="TableFilter\static\style\themes\skyblue\skyblue.styl" />
     <Content Include="TableFilter\static\style\themes\transparent\transparent.styl" />
     <Content Include="TableFilter\static\style\toolbar.styl" />
+    <Content Include="Scripts\jszip.min.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

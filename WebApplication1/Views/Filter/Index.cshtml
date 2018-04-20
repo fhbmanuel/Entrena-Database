@@ -5,6 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .coolContainer h4:first-of-type {
+        float: left;
+    }
+
+    .coolContainer h4:last-of-type {
+        float: right;
+    }
+</style>
+
 @if (Request.Cookies["session"]["role"] == "Admin")
 {
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -37,9 +47,14 @@
         </div>
     </div>
 
-    <h2>Summary</h2>
+    <h2 align="center" style="color:#428bca">Summary</h2>
+    <div class="coolContainer">
+        <h4 style="color:#428bca">Total Participants: </h4>
+        <h4 style="color:#428bca">Total Activities: </h4>
+    </div>
+    <br>
 
-    <table id="demo-tot" class="table">
+    <table id="my-table" class="table">
         <tr>
             <th>
                 Activity
@@ -74,6 +89,12 @@
             <th>
                 Location
             </th>
+            <th>
+                A. ID
+            </th>
+            <th>
+                P. ID
+            </th>
         </tr>
 
         @foreach (System.Data.DataRow row in Model.ATable.Rows)
@@ -90,7 +111,14 @@
         }
 
     </table>
+    <p></p>
+    <a id="dlink" style="display:none;"></a>
+    <br>
+    <input type="button" class="btn btn-default" onclick="tableToExcel('my-table', 'name', 'myfile.xls')" value="Export to Excel">
+    <br><br>
 }
+
+<!--What happens when you are not an Admin.-->
 
 else
 {
@@ -121,5 +149,79 @@ else
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="/tablefilter/dist/tablefilter/tablefilter.js"></script>
+
+    @* Table settings for the filters. *@
+    <script>
+        var filtersConfig = {
+            base_path: '/tablefilter/dist/tablefilter/',
+            alternate_rows: true,
+            btn_reset: true,
+            rows_counter: true,
+            loader: true,
+            status_bar: true,
+            col_4: 'select',
+            col_6: 'select',
+            col_7: 'select',
+            col_8: 'select',
+            col_9: 'select',
+            highlight_keywords: true,
+            clear_filter_text: 'All',
+            grid_layout: {
+                width: '100%',
+                default_col_width: '125px'
+            },
+            auto_filter: {
+                delay: 1000 //milliseconds
+            },
+            filters_row_index: 1,
+            msg_filter: 'Filtering...',
+            state: {
+                types: ['local_storage'],
+                filters: true,
+                page_number: true,
+                page_length: true,
+                sort: true,
+                filters_visibility: true
+            },
+            paging: {
+                results_per_page: ['Records: ', [10, 25, 50, 100]]
+            },
+            extensions: [{
+                name: 'sort'
+            }, {
+                name: 'filtersVisibility',
+                target_id: 'fltsBtn'
+            }]
+        }
+        var tf = new TableFilter('my-table', filtersConfig)
+        tf.init();
+    </script>
+
+    @* Export to Excel *@
+    <script>
+        var tableToExcel = (function () {
+            var uri = 'data:application/vnd.ms-excel;base64,'
+                , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+                , base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+                , format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+            return function (table, name, filename) {
+                if (!table.nodeType) table = document.getElementById(table)
+                var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+
+                document.getElementById("dlink").href = uri + base64(format(template, ctx));
+                document.getElementById("dlink").download = filename;
+                document.getElementById("dlink").click();
+
+            }
+        })()
+    </script>
+
+    @* Count cells in table *@
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myTable").rows[0].cells.length;
+            document.getElementById("demo").innerHTML = "Found " + x + " cells in the first tr element.";
+        }
+    </script>
 }
 

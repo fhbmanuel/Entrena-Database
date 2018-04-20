@@ -19,7 +19,7 @@ namespace WebApplication1.Controllers
         {
             string query = "select Activity_Name, Starting_Date, Participant_Name, Participant_Last_Name, " +
                 "Gender_Name, Participant_Date_Of_Birth, Sub_Product_Name, Product_Name, " +
-                "Country_Name, Province_Name, Location_Name " +
+                "Country_Name, Province_Name, Location_Name, Activity_ID, Participant_ID " +
                 "from((((((((Activities a join Activities_Participation ap on ap.ActivityID = a.Activity_ID) " +
                 "join Participants p on p.Participant_ID = ap.ParticipantID) " +
                 "join Genders g on g.Gender_ID = p.GenderID) " +

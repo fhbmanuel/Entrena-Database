@@ -5,7 +5,124 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (Request.Cookies["session"]["role"] == "Admin" || Request.Cookies["session"]["role"] == "Facilitator")
+@if (Request.Cookies["session"]["role"] == "Admin")
+{
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ENTRENA DB", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Participants", "Index", "Participants")</li>
+                    <li>@Html.ActionLink("Activities", "Index", "Activities")</li>
+                    <li>@Html.ActionLink("Participation", "Index", "activities_participation")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li style="background-color:#800808">
+                        @if ((Request.Cookies["session"]["ses"] == "1") || Request.IsAuthenticated)
+        {
+                @Html.ActionLink("Sign Out, " + Request.Cookies["session"]["user"], "Logout", "User")
+}
+else
+{
+                @Html.ActionLink("Sign In", "Login", "User")
+}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table id="myTable" class="table">
+        <tr>
+            <th onclick="sortTable(0)">
+                Name
+            </th>
+            <th onclick="sortTable(1)">
+                Last Name
+            </th>
+            <th onclick="sortTable(2)">
+                Age
+            </th>
+            <th onclick="sortTable(3)">
+                Phone
+            </th>
+            <th onclick="sortTable(4)">
+                Email
+            </th>
+            <th onclick="sortTable(5)">
+                Registration Date
+            </th>
+            <th onclick="sortTable(6)">
+                Other Details
+            </th>
+            <th onclick="sortTable(7)">
+                Gender
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Participant_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Participant_Last_Name)
+                </td>
+                <td>
+                    @{
+                        var todaysDate = DateTime.Now;
+                        var itemDate = item.Participant_Date_Of_Birth ?? DateTime.MinValue;
+                        var dateDifference = DateTime.Now.Subtract(itemDate);
+                        var years = dateDifference.Days / 365;
+                        if (DateTime.Now.Year == years)
+                        {
+                            years = 0;
+                        }
+                    }
+                    @years
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Participant_Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Participant_Email)
+                </td>
+                <td>
+                    @{
+                        var dateRegistration = item.Participant_Registration_Date.Month + "/" + item.Participant_Registration_Date.Day + "/" + item.Participant_Registration_Date.Year;
+                    }
+                    @dateRegistration
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Participant_Details)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender.Gender_Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Participant_ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Participant_ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Participant_ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+else if (Request.Cookies["session"]["role"] == "Facilitator")
 {
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
