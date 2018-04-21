@@ -40,7 +40,8 @@
 
     <h2 align="center" style="color:#428bca">Summary</h2>
 
-    <code>Total Participants: </code> <span id="flt-sum" class="badge"></span>
+    <code>Total Participants: </code> <span id="flt-sum2" class="badge"></span>
+    <code>Total Activities: </code> <span id="flt-sum" class="badge"></span>
 
     <table id="my-table" class="table">
         <tr>
@@ -186,25 +187,23 @@ else
                 {
                     // minimal configuration for column operation extension
                     name: 'colOps',
-                    col: [12]
+                    id: [
+                        'flt-sum', 'flt-sum2'
+                    ],
+                    col: [
+                        11,12
+                    ],
+                    operation: [
+                        'mean', 'sum'
+                    ],
+                    decimal_precision: [
+                        0, 0
+                    ]
                 }
             ]
         }
         var tf = new TableFilter('my-table', filtersConfig);
-        tf.emitter.on(['column-calc'], calcAll);
         tf.init();
-
-        function calcAll(tf, colOps, colIndex) {
-            calc(tf, colOps, colIndex, 'sum', false, 'flt-sum');
-        }
-        function calc(tf, colOps, colIndex, operation, onlyVisible, labelId) {
-            var colValues = tf.getFilteredDataCol(colIndex, false, true, [], onlyVisible);
-            var result = 0;
-            if (operation == 'sum') {
-                result = colOps.calcSum(colValues);
-            }
-            document.getElementById(labelId).innerHTML = result.toFixed(0);
-        }
     </script>
 
     <script>
