@@ -44,12 +44,15 @@
     <code>Total Activities: </code> <span id="flt-sum" class="badge"></span>
 
     <table id="my-table" class="table">
-        <tr>
+        <tr >
             <th>
                 Activity
             </th>
             <th>
                 Starting Date
+            </th>
+            <th>
+                Facilitator
             </th>
             <th>
                 Participant Name
@@ -85,14 +88,28 @@
                 P. ID
             </th>
         </tr>
-
         @foreach (System.Data.DataRow row in Model.ATable.Rows)
         {
             <tr>
                 @foreach (var cell in row.ItemArray)
                 {
                     <td>
-                        @cell.ToString()
+                    @if (cell.ToString() == row.ItemArray[6].ToString())
+                    {
+                        if (!(row.ItemArray[6] is DBNull))
+                        {
+                            var age = DateTime.Today.Year - Convert.ToDateTime(cell).Year;
+                            if(Convert.ToDateTime(cell) > DateTime.Today.AddYears(-age)) { age = age - 1; }
+                            @age
+                        }
+                        else
+                        {
+                            @cell.ToString();
+                        }
+
+                    }
+                    else { @cell.ToString();}
+                    
                     </td>
                 }
 
@@ -103,7 +120,7 @@
     <p></p>
     <a id="dlink" style="display:none;"></a>
     <br>
-    <input type="button" class="btn btn-default" onclick="tableToExcel('my-table', 'name', 'myfile.xls')" value="Export to Excel">
+    <input type="button" class="btn btn-default" onclick="tableToExcel('my-table', 'Name', 'myfile.xls')" value="Export to Excel">
     <br><br>
 }
 
@@ -146,11 +163,11 @@ else
             rows_counter: true,
             loader: true,
             status_bar: true,
-            col_4: 'select',
-            col_6: 'select',
-            col_7: 'select',
+            ignore_diacritics: true,
+            col_5: 'select',
             col_8: 'select',
             col_9: 'select',
+            col_10: 'select',
             highlight_keywords: true,
             clear_filter_text: 'All',
             grid_layout: {
@@ -174,11 +191,11 @@ else
                 results_per_page: ['Records: ', [10, 25, 50, 100]]
             },
             col_types: [
+                'string', { type: 'date', locale: 'en', format: '{dd}-{MM}-{yyyy|yy}' }, 'string',
                 'string', 'string', 'string',
+                'number', 'string', 'string',
                 'string', 'string', 'string',
-                'string', 'string', 'string',
-                'string', 'string', 'number',
-                'number'
+                'number', 'number'
             ],
             extensions: [
                 {
@@ -191,7 +208,7 @@ else
                         'flt-sum', 'flt-sum2'
                     ],
                     col: [
-                        11,12
+                        12,13
                     ],
                     operation: [
                         'mean', 'sum'

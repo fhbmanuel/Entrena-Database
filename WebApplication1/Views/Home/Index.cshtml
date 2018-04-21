@@ -33,8 +33,16 @@
             </div>
         </div>
     </div>
-
+    
     <div class="row">
+        <div class="col-md-4">
+            <fieldset >
+                <legend>
+                    <a href="/Filter/Index">Summary</a>
+                </legend>
+                <p>Filter all the tables by any subject.</p>
+            </fieldset>
+        </div>
         <div class="col-md-4">
             <fieldset>
                 <legend><a href="/participants/Index">Participants</a></legend>
@@ -52,14 +60,6 @@
                 <p>If you want to modify, add, or delete any activity, click the buttom.</p>
             </fieldset>
         </div>
-        <div class="col-md-4">
-            <fieldset>
-                <legend>
-                    <a href="/activities_participation/Index">Participation</a>
-                </legend>
-                <p>After you have registered all the participants of a given activity and the activity itself, link them together herer.</p>
-            </fieldset>
-        </div>
     </div>
 
     <div>
@@ -67,6 +67,7 @@
             <legend style="color:#428bca">Other Tables:</legend>
 
             <ul>
+                <li>@Html.ActionLink("Activity Participation", "Index", "Activities_Participation")</li>
                 <li>@Html.ActionLink("Facilitators", "Index", "Facilitators")</li>
                 <li>@Html.ActionLink("Organizations", "Index", "Organizations")</li>
                 <li>@Html.ActionLink("Partnership Types", "Index", "Partnership_Types")</li>
@@ -86,7 +87,7 @@
 }
 
 else if (Request.Cookies["session"]["role"] == "Facilitator")
-{ 
+{
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -136,7 +137,8 @@ else if (Request.Cookies["session"]["role"] == "Facilitator")
     </div>
 }
 
-else{
+else
+{
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">

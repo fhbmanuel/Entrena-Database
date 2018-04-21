@@ -20,6 +20,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Participants", "Index", "Participants")</li>
+                    @if (Request.Cookies["session"]["role"] == "Admin") { <li>@Html.ActionLink("Activities", "Index", "Activities")</li>}
                     <li>@Html.ActionLink("Participation", "Index", "activities_participation")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li style="background-color:#800808">
